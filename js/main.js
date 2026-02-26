@@ -1,53 +1,62 @@
-// Function to control the responsiveness of the navigation bar
-function responsive_control() {
-  // Get the element with the id "myTopnav"
-  let x = document.getElementById("myTopnav");
-
-  // Check if the class name of the element is "topnav"
-  if (x.className === "topnav") {
-    // If it is, add the "responsive" class to the element
-    x.className += " responsive";
-  } else {
-    // If it's not, remove the "responsive" class from the element
-    x.className = "topnav";
-  }
+// Nav: add shadow when scrolled
+const nav = document.querySelector('.topnav');
+if (nav) {
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
+// Lightbox
 const images = document.querySelectorAll('.lightbox-img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 let currentIndex = 0;
-
-images.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    currentIndex = index;
-    showImage();
-  });
-});
 
 function showImage() {
   lightbox.style.display = 'flex';
   lightboxImg.src = images[currentIndex].src;
 }
 
-document.getElementById('next').onclick = () => {
+function hideLightbox() {
+  lightbox.style.display = 'none';
+}
+
+images.forEach((img, index) => {
+  img.addEventListener('click', (e) => {
+    e.preventDefault();
+    currentIndex = index;
+    showImage();
+  });
+});
+
+document.getElementById('next').addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % images.length;
   showImage();
-};
+});
 
-document.getElementById('prev').onclick = () => {
+document.getElementById('prev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   showImage();
-};
+});
 
-document.querySelector('.close').onclick = () => {
-  lightbox.style.display = 'none';
-};
+document.querySelector('#lightbox .close').addEventListener('click', hideLightbox);
 
-document.addEventListener('keydown', e => {
-  if (lightbox.style.display === 'flex') {
-    if (e.key === 'ArrowRight') document.getElementById('next').click();
-    if (e.key === 'ArrowLeft') document.getElementById('prev').click();
-    if (e.key === 'Escape') lightbox.style.display = 'none';
+// Close when clicking backdrop (not the image or controls)
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) hideLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (lightbox.style.display !== 'flex') return;
+  if (e.key === 'ArrowRight') {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
   }
+  if (e.key === 'ArrowLeft') {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+  }
+  if (e.key === 'Escape') hideLightbox();
 });
