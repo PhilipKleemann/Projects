@@ -1,54 +1,98 @@
 <!DOCTYPE html>
-<html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philip Kleemann | Data Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
 <body>
 
-<div class="w3-container">
-  <h2>Slideshow Indicators</h2>
-  <p>Using images to indicate how many slides there are in the slideshow, and highlight the image the user is currently viewing.</p>
-</div>
+  <!-- NAV -->
+  <nav class="topnav">
+    <div class="nav-left">Philip Kleemann</div>
+    <div class="nav-right">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
 
-<div class="w3-content" style="max-width:1200px">
-  <img class="mySlides" src="img_nature_wide.jpg" style="width:100%;display:none">
-  <img class="mySlides" src="img_snow_wide.jpg" style="width:100%">
-  <img class="mySlides" src="img_mountains_wide.jpg" style="width:100%;display:none">
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Data Visualization</h1>
+    <p>Exploring stories through data, design, and code.</p>
+  </section>
 
-  <div class="w3-row-padding w3-section">
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="img_nature_wide.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)">
+  <!-- GALLERY -->
+  <section id="work" class="section">
+    <h2>Selected Visualizations</h2>
+
+    <div class="gallery">
+
+      <div class="gallery-item">
+        <img src="img/Pallet.png" alt="Color Pallet" class="lightbox-img">
+        <div class="desc">
+          <h3>Sunset Color Palettes</h3>
+          <p>
+            A Python-generated visualization analyzing the color distribution of 30 sunset photographs
+            taken at Golden Gardens, Seattle. The x-axis represents capture date and the y-axis shows
+            proportional color presence.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="img/Dendrogram.png" alt="Dendrogram" class="lightbox-img">
+        <div class="desc">
+          <h3>Pike Place Yelp Dendrogram</h3>
+          <p>
+            A hierarchical clustering of Yelp data visualizing points of interest in Pike Place Market.
+            Node size reflects review ratings, revealing popularity patterns across categories.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="img/Sankey.png" alt="Sankey Diagram" class="lightbox-img">
+        <div class="desc">
+          <h3>Seattle Bike Traffic Flow</h3>
+          <p>
+            A Sankey diagram illustrating bike traffic volume between major trails and stops in Seattle.
+            Line thickness corresponds to traffic magnitude.
+          </p>
+        </div>
+      </div>
+
     </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="img_snow_wide.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)">
-    </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="img_mountains_wide.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)">
-    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <h2>About</h2>
+    <p>
+      A dedicated student-athlete at the University of Washington pursuing a degree in Geography with Data Science while honing skills in computer science, R, SQL, and web development (JavaScript, HTML, CSS). Currently balancing rigorous academics with athletic commitments, contributing to both team success and personal growth. Previous educational experience includes a high school diploma from Newbury Park High School, where a strong foundation in digital arts and technology was cultivated. Passionate about leveraging data science and technology to solve complex problems and drive innovation.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Philip Kleemann
+  </footer>
+
+  <!-- LIGHTBOX -->
+<div id="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightbox-img" src="">
+  <div class="controls">
+    <span id="prev">&#10094;</span>
+    <span id="next">&#10095;</span>
   </div>
 </div>
 
-<script>
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
-</script>
+  <script src="js/main.js"></script>
 
 </body>
 </html>
